@@ -1,9 +1,36 @@
 import Image from "next/image";
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://Harambessj:Harambe100@quotes.vuxgr.mongodb.net/?retryWrites=true&w=majority&appName=quotes";
+
+
+
+const client = new MongoClient(uri, {
+  serverApi: {
+      version: ServerApiVersion.v1,
+      strict: true,
+      deprecationErrors: true,
+    }
+})
+
+
+const db = client.db('got-quotes')
+
+const quotesCollection = db.collection('quotes')
+
+const quotty = quotesCollection.find().sort().toArray()
+
+console.log(quotty)
 
 export default function Home() {
+
   return (
   <>
-  <form action="/quotes">
+  <ul>
+    <li>
+      {5}
+    </li>
+  </ul>
+  <form action="/quotes" method='GET'>
   <div className="flex flex-row space-x-6 justify-center items-center mt-40	text-white">
       <label htmlFor="char">Character</label>
 <input className='text-black' type="text" name='char'/>
